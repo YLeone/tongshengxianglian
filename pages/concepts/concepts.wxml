@@ -1,0 +1,32 @@
+<view class="container">
+
+  <view class="concept-header">
+    <text class="concept-title">{{currentConcept.name}}</text>
+  </view>
+
+  <view class="introduction-section">
+    <text class="introduction-text">{{currentConcept.introduction}}</text>
+    <button class="audio-btn" bindtap="playIntroduction">{{isPlaying ? '暂停介绍' : '播放介绍'}}</button>
+  </view>
+
+  <view class="scenes-list">
+    <text class="section-title">场景声音示例</text>
+    <block wx:for="{{currentConcept.scenes}}" wx:key="id">
+      <view class="scene-item">
+        <text class="scene-name">{{item.name}}</text>
+        <text class="scene-description">{{item.description}}</text>
+        <button class="audio-btn" bindtap="playSceneAudio" data-scene-id="{{item.id}}">{{isPlaying ? '暂停' : '播放'}}</button>
+      </view>
+    </block>
+  </view>
+
+  <view class="concept-switcher">
+    <block wx:for="{{concepts}}" wx:key="id">
+      <view class="concept-btn-container">
+        <button class="concept-btn" bindtap="switchConcept" data-concept-id="{{item.id}}">{{item.name}}</button>
+        <canvas class="progress-ring" canvas-id="progress-{{item.id}}" width="40" height="40"></canvas>
+        <text class="progress-text">{{getMasteryLevel(item.id) || 0}}%</text>
+      </view>
+    </block>
+  </view>
+</view>

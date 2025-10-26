@@ -1,0 +1,17 @@
+{
+  "pages": [
+    "pages/card/card",
+    "pages/concepts/concepts",
+    "pages/stats/stats"
+  ],
+  "window": {
+    "navigationBarBackgroundColor": "#ffffff",
+    "navigationBarTextStyle": "black",
+    "navigationBarTitleText": "瞳声相连"
+  },
+  "libVersion": "2.18.0",
+  "networkTimeout": {
+    "tcp": 5000
+  },
+  "sitemapLocation": "sitemap.json"
+}

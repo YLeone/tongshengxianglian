@@ -1,0 +1,74 @@
+<view class="container">
+  <view class="user-name-container">
+  <input class="user-name-input" placeholder="请输入姓名" bindinput="onTempNameInput" value="{{tempUserName}}"></input>
+  <button class="confirm-btn" bindtap="confirmUserName">确认</button>
+</view>
+
+<view class="reader-control">
+  <view class="reader-ip-port">
+    <view class="config-item">
+      <text>读卡器IP:</text>
+      <input class="ip-input" type="text" bindinput="bindIPInput" value="{{readerIP}}" placeholder="输入IP地址"/>
+    </view>
+    <view class="config-item">
+      <text>端口:</text>
+      <input class="port-input" type="number" bindinput="bindPortInput" value="{{readerPort}}" placeholder="输入端口号"/>
+    </view>
+    <button class="connect-btn" bindtap="handleConnect" style="position: relative; left: 100rpx; top: -55rpx; width: 162rpx; display: flex; box-sizing: border-box">{{readerConnected ? '断开连接' : '连接读卡器'}}</button>
+  </view>
+  <view class="reader-status">{{readerConnected ? '已连接读卡器' : '未连接读卡器'}}</view>
+
+  <view class="reader-operation">
+    <button class="start-read-btn" bindtap="startReading" disabled="{{!readerConnected || reading}}">开始读卡</button>
+    <button class="stop-btn" bindtap="stopReading" disabled="{{!readerConnected || !reading}}">停止读卡</button>
+  </view>
+  <view class="current-tag" wx:if="{{currentTagId}}">当前标签: {{currentTagId}}</view>
+</view>
+
+<view class="nav-buttons">
+  <navigator url="/pages/concepts/concepts" class="nav-button">概念教学</navigator>
+</view>
+
+<view class="search-container">
+    <input class="search-input" placeholder="搜索书本位置或物品..." bindinput="onSearchInput" value="{{searchText}}"></input>
+    <button class="search-btn" bindtap="searchRecords">搜索</button>
+  </view>
+
+  <view class="card-info" wx:if="{{cardInfo}}">
+    <view class="info-title">当前卡片信息</view>
+    <view class="info-item">
+      <text class="label">卡片ID：</text>
+      <text class="value">{{cardInfo.id}}</text>
+    </view>
+    <view class="info-item">
+      <text class="label">读取时间：</text>
+      <text class="value">{{cardInfo.time}}</text>
+    </view>
+    <view class="info-item description">
+      <text class="label">操作描述：</text>
+      <text class="value">{{cardInfo.description}}</text>
+    </view>
+  </view>
+
+  <view class="no-data" wx:else>
+    暂无卡片信息，请点击上方按钮读取
+  </view>
+
+  <view class="history-section">
+    <view class="history-header">
+      <text class="history-title">历史记录</text>
+      <button class="clear-btn" bindtap="clearHistory">清除</button>
+    </view>
+
+    <view class="history-list">
+      <block wx:for="{{filteredHistory}}" wx:key="index">
+        <view class="history-item" bindtap="playVoice" data-description="{{item.description}}">
+          <view class="item-description">{{item.description}}</view>
+        </view>
+      </block>
+      <view class="no-history" wx:if="{{filteredHistory.length === 0}}">
+      暂无操作记录
+    </view>
+    </view>
+  </view>
+</view>

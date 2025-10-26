@@ -1,0 +1,17 @@
+<view class="stats-container">
+  <text class="stats-title">学习统计</text>
+
+  <view class="stats-chart">
+    <canvas canvas-id="masteryChart" class="chart"></canvas>
+  </view>
+
+  <view class="concept-stats">
+    <block wx:for="{{conceptStats}}" wx:key="conceptId">
+      <view class="stat-item">
+        <text class="concept-name">{{item.name}}</text>
+        <text class="learn-time">学习时间: {{item.learnTime}}秒</text>
+        <text class="mastery-level">掌握程度: {{item.masteryLevel}}%</text>
+      </view>
+    </block>
+  </view>
+</view>
